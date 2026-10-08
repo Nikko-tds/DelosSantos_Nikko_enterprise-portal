@@ -89,21 +89,6 @@ export const authConfig = {
     strategy: "jwt",
   },
   callbacks: {
-    authorized: ({ auth, request: {nextUrl}}) => {
-      const isLoggedIn = !!auth?.user;
-      const protectedPaths = [
-        "/projects",
-        "/tasks"
-      ]
-      const isOnProtectedPath = protectedPaths.some((path) => nextUrl.pathname.startsWith(path));
-
-      if (isOnProtectedPath) {
-        return isLoggedIn;
-      }
-
-      return true;
-    },
-    
     session: ({ session, token }) => ({
       ...session,
       user: {
